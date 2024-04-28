@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <EditText
+        android:id="@+id/animalNewName"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/animal_name"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:autofillHints="@string/animal_name"/>
+
+    <EditText
+        android:id="@+id/animalNewHabitat"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/animal_habitat"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:autofillHints="@string/animal_habitat" />
+
+    <EditText
+        android:id="@+id/animalNewDiet"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/animal_diet"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:autofillHints="@string/animal_diet" />
+</LinearLayout>

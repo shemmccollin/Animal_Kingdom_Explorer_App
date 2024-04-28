@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    tools:context=".ui.dashboard.DashboardFragment">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:id="@+id/animalBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/animal_details"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/animal"
+        android:drawableTint="@color/white"/>
+
+    <Button
+        android:id="@+id/speciesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/species_details"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/species"
+        android:drawableTint="@color/white"/>
+</LinearLayout>

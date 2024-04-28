@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Animal Kingdom Explorer App</string>
+    <string name="add_animal">Add Animal</string>
+    <string name="animal_name">Animal Name</string>
+    <string name="animal_habitat">Habitat</string>
+    <string name="animal_diet">Diet</string>
+    <string name="add_species">Add Species</string>
+    <string name="species_name">Species Name</string>
+    <string name="species_description">Species Description</string>
+    <string name="animal_details">Animal Details</string>
+    <string name="species_details">Species Details</string>
+    <string name="add_button">Add Button</string>
+</resources>
