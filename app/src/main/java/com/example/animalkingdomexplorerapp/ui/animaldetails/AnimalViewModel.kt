@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.example.animalkingdomexplorerapp.data.model.Animal
 import com.example.animalkingdomexplorerapp.data.repository.AnimalRepository
 
-class AnimalViewModel: ViewModel() {
-     fun getAllAnimals(context: Context): LiveData<List<Animal>>{
+class AnimalViewModel: ViewModel() {// Inheriting from the ViewModal
+
+    // These functions interact with the repository layer to get and send the data
+    fun getAllAnimals(context: Context): LiveData<List<Animal>>{
          return AnimalRepository.getAllAnimalData(context)
     }
 

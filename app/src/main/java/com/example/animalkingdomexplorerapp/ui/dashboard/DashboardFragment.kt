@@ -9,9 +9,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.animalkingdomexplorerapp.R
 import com.example.animalkingdomexplorerapp.databinding.FragmentDashboardBinding
 
-
 class DashboardFragment : Fragment() {
 
+    //Setup the view binding for this fragment
     private lateinit var binding: FragmentDashboardBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,14 +22,15 @@ class DashboardFragment : Fragment() {
 
         binding = FragmentDashboardBinding.bind(view)
 
+
         binding.apply {
-            animalBtn.setOnClickListener{
-                //val directions = DashboardFragmentDirections.actionDashboardFragmentToAnimalDetailsFragment()
+            animalBtn.setOnClickListener{//Setup the on click functionality for the animal button
+                // Navigate from the dashboard to the animal fragment
                 findNavController().navigate(R.id.action_dashboardFragment_to_animalDetailsFragment)
             }
 
-            speciesBtn.setOnClickListener{
-                //val directions = DashboardFragmentDirections.actionDashboardFragmentToSpeciesDetailsFragment()
+            speciesBtn.setOnClickListener{//Setup the on click functionality for the species button
+                //Navigate from the dashboard to the species fragment
                 findNavController().navigate(R.id.action_dashboardFragment_to_speciesDetailsFragment)
             }
         }

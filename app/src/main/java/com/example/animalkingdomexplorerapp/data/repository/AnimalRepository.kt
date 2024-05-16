@@ -10,15 +10,18 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
-class AnimalRepository: CoroutineScope {
+class AnimalRepository: CoroutineScope {// Inheriting from Coroutines
 
+    //Retrieving and inserting the data in to the DB
     companion object {
         private var appDatabase: AppDatabase? = null
 
+        // Initialization the DB
         private fun initDB(context: Context): AppDatabase {
             return AppDatabase.invoke(context)
         }
 
+        //Inserting the data
         fun insert(context: Context, animal :Animal){
             appDatabase = initDB(context)
             CoroutineScope(Dispatchers.IO).launch {
@@ -26,6 +29,7 @@ class AnimalRepository: CoroutineScope {
             }
         }
 
+        //Getting the data
         fun getAllAnimalData(context: Context): LiveData<List<Animal>> {
             appDatabase = initDB(context)
 
@@ -33,6 +37,7 @@ class AnimalRepository: CoroutineScope {
         }
 
         private suspend fun insertAnimalBG(appDB: AppDatabase, animal: Animal){
+            //Using the Dispatchers.IO coroutine to save the data
             withContext(Dispatchers.IO){
                 appDB.getAnimalDao().addAnimal(animal)
             }

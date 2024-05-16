@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.animalkingdomexplorerapp.data.model.Animal
 import com.example.animalkingdomexplorerapp.data.model.Species
 
+//This is the Data Access Object for Species, it defines the functionality expected from the DB
 @Dao
 interface SpeciesDao {
     @Query("SELECT * FROM species ORDER BY id DESC")
@@ -15,6 +15,7 @@ interface SpeciesDao {
     @Query("SELECT * FROM species WHERE id = :speciesId")
     fun getSpeciesById(speciesId: Long): Species
 
+    //the suspend keyword here means it is expected to run on a background thread
     @Insert
-    fun addSpecies(species: Species)
+    suspend fun addSpecies(species: Species)
 }

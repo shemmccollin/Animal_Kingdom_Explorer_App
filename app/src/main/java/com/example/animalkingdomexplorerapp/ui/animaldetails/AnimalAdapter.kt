@@ -15,11 +15,13 @@ class AnimalAdapter(private var animals: ArrayList<Animal>):RecyclerView.Adapter
         parent: ViewGroup,
         viewType: Int
     ): AnimalAdapter.AnimalViewHolder {
+        //inflates the viewholder with the layout what we want to display in the recycler view
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.animal_item, parent, false)
         return AnimalViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: AnimalAdapter.AnimalViewHolder, position: Int) {
+        //Sets the views with the values from the database
         val animal = animals[position]
 
         holder.animalName.text = animal.name
@@ -28,11 +30,13 @@ class AnimalAdapter(private var animals: ArrayList<Animal>):RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int {
+        //Returns the size of the array
         return animals.size
     }
 
     fun setData(animalList: ArrayList<Animal>)
     {
+        //Updates the view when the data changes
         this.animals = animalList
         notifyDataSetChanged()
     }

@@ -15,23 +15,27 @@ class SpeciesAdapter(private var species: ArrayList<Species>):RecyclerView.Adapt
         parent: ViewGroup,
         viewType: Int
     ): SpeciesAdapter.SpeciesViewHolder {
+        //inflates the viewholder with the layout what we want to display in the recycler view
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.species_item, parent, false)
         return SpeciesViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: SpeciesAdapter.SpeciesViewHolder, position: Int) {
+        //Sets the views with the values from the database
         val spec = species[position]
 
-        holder.speciesName .text = spec.name
-        holder.speciesDescription .text = spec.description
+        holder.speciesName.text = spec.name
+        holder.speciesDescription.text = spec.description
     }
 
     override fun getItemCount(): Int {
+        //Returns the size of the array
         return species.size
     }
 
     fun setData(speciesList: ArrayList<Species>)
     {
+        //Updates the view when the data changes
         this.species = speciesList
         notifyDataSetChanged()
     }

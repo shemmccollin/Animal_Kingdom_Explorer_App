@@ -11,16 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animalkingdomexplorerapp.R
-import com.example.animalkingdomexplorerapp.data.model.Animal
 import com.example.animalkingdomexplorerapp.data.model.Species
 import com.example.animalkingdomexplorerapp.databinding.FragmentSpeciesDetailsBinding
 import com.example.animalkingdomexplorerapp.toast
-import com.example.animalkingdomexplorerapp.ui.animaldetails.AnimalAdapter
-import com.example.animalkingdomexplorerapp.ui.animaldetails.AnimalViewModel
-
 
 class SpeciesDetailsFragment : Fragment() {
+    //Setup the view binding for this fragment
     private lateinit var binding: FragmentSpeciesDetailsBinding
+
+    //Setup the RecyclerView, Adapter and viewModal
     private lateinit var speciesRV: RecyclerView
     private lateinit var speciesAdapter: SpeciesAdapter
     private lateinit var speciesViewModal: SpeciesViewModel
@@ -40,24 +39,28 @@ class SpeciesDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Set the viewmodal with the viewmodalprovider
         speciesViewModal = ViewModelProvider(this)[SpeciesViewModel::class.java]
         speciesRV = binding.speciesRecycler
         speciesAdapter = SpeciesAdapter(ArrayList())
+        //set the recycler view with the layout manager and the adapter
         speciesRV.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = speciesAdapter
         }
 
+        //Setup a viewmodal observe to update when ever data changes
         speciesViewModal.getAllSpecies(requireContext()).observe(viewLifecycleOwner) {
             speciesAdapter.setData(it as ArrayList<Species>)
         }
 
-        binding.speciesFloatingBtn.setOnClickListener{
+        binding.speciesFloatingBtn.setOnClickListener{//Setup the on click event for the floating button, to open a dialog to add data
             val mView = getLayoutInflater().inflate(R.layout.new_species, null)
             val name = mView.findViewById<EditText>(R.id.speciesNewName)
             val description = mView.findViewById<EditText>(R.id.speciesNewDescription)
 
+            //Setting up the dialog with a custom view
             val dialog: AlertDialog = AlertDialog.Builder(context)
                 .setTitle(getString(R.string.add_species))
                 .setIcon(R.drawable.species)
@@ -71,6 +74,7 @@ class SpeciesDetailsFragment : Fragment() {
             val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             positiveButton.setOnClickListener {
 
+                //Error checking
                 if(name.text.toString().isBlank())
                 {
                     name.error = "Name required"
@@ -85,6 +89,7 @@ class SpeciesDetailsFragment : Fragment() {
                     return@setOnClickListener
                 }
 
+                //Starts the the insert species function to save the data from the modal
                 speciesViewModal.insertSpecies(requireContext(),
                     Species(
                         name.text.toString(),
@@ -92,6 +97,7 @@ class SpeciesDetailsFragment : Fragment() {
                     )
                 )
 
+                //Dismiss the dialog
                 dialog.dismiss()
                 context?.toast("Species Saved")
             }

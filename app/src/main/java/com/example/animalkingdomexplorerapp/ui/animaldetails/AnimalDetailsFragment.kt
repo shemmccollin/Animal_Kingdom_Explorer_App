@@ -18,8 +18,10 @@ import com.example.animalkingdomexplorerapp.databinding.FragmentAnimalDetailsBin
 import com.example.animalkingdomexplorerapp.toast
 
 class AnimalDetailsFragment : Fragment() {
-
+    //Setup the view binding for this fragment
     private lateinit var binding: FragmentAnimalDetailsBinding
+
+    //Setup the RecyclerView, Adapter and viewModal
     private lateinit var animalRV: RecyclerView
     private lateinit var animalAdapter: AnimalAdapter
     private lateinit var animalViewModal: AnimalViewModel
@@ -39,25 +41,30 @@ class AnimalDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Set the viewmodal with the viewmodalprovider
         animalViewModal = ViewModelProvider(this)[AnimalViewModel::class.java]
         animalRV = binding.animalRecycler
         animalAdapter = AnimalAdapter(ArrayList())
+
+        //set the recycler view with the layout manager and the adapter
         animalRV.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = animalAdapter
         }
 
+        //Setup a viewmodal observe to update when ever data changes
         animalViewModal.getAllAnimals(requireContext()).observe(viewLifecycleOwner) {
             animalAdapter.setData(it as ArrayList<Animal>)
         }
 
-        binding.animalFloatingBtn.setOnClickListener{
+        binding.animalFloatingBtn.setOnClickListener{//Setup the on click event for the floating button, to open a dialog to add data
             val mView = getLayoutInflater().inflate(R.layout.new_animal, null)
             val name = mView.findViewById<EditText>(R.id.animalNewName)
             val habitat = mView.findViewById<EditText>(R.id.animalNewHabitat)
             val diet = mView.findViewById<EditText>(R.id.animalNewDiet)
 
+            //Setting up the dialog with a custom view
             val dialog: AlertDialog = AlertDialog.Builder(context)
                 .setTitle(getString(R.string.add_animal))
                 .setIcon(R.drawable.animal)
@@ -70,6 +77,7 @@ class AnimalDetailsFragment : Fragment() {
             val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             positiveButton.setOnClickListener {
 
+                //Error checking
                 if(name.text.toString().isBlank())
                 {
                     name.error = "Name required"
@@ -91,6 +99,7 @@ class AnimalDetailsFragment : Fragment() {
                     return@setOnClickListener
                 }
 
+                //Starts the the insert animal function to save the data from the modal
                 animalViewModal.insertAnimal(requireContext(),
                     Animal(
                         name.text.toString(),
@@ -99,6 +108,7 @@ class AnimalDetailsFragment : Fragment() {
                     )
                 )
 
+                //Dismiss the dialog
                 dialog.dismiss()
                 context?.toast("Animal Saved")
             }
